@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VictorBank", "VictorBank\VictorBank.csproj", "{57899BA0-7485-4290-94EC-55C79C6C5DAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTest", "XUnitTest\XUnitTest.csproj", "{BE276EFA-2A70-4220-96E7-FE993FDC6948}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57899BA0-7485-4290-94EC-55C79C6C5DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57899BA0-7485-4290-94EC-55C79C6C5DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57899BA0-7485-4290-94EC-55C79C6C5DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57899BA0-7485-4290-94EC-55C79C6C5DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE276EFA-2A70-4220-96E7-FE993FDC6948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE276EFA-2A70-4220-96E7-FE993FDC6948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE276EFA-2A70-4220-96E7-FE993FDC6948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE276EFA-2A70-4220-96E7-FE993FDC6948}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {572C9682-3CDD-4E6A-920E-B4C46B86F2F5}
+	EndGlobalSection
+EndGlobal
