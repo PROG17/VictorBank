@@ -73,5 +73,35 @@ namespace XUnitTest
             Assert.Equal(_bankRepo._customerWithAccounts.Single(x => x.CustomerNumber == 0).Account.Balance, 20);
             _bankRepo._customerWithAccounts.Remove(newCustomer);
         }
+
+        [Fact]
+        public void TransferAmount()
+        {
+            var bankRepo = BankRepository.Instance();
+
+            int sum = 1;
+            var accounts = bankRepo.GetAllCustomerAndAccounts();
+            var expectedBalanceFrom = accounts[0].Account.Balance - sum;
+            var expecedBalanceTo = accounts[1].Account.Balance + sum;
+
+            bankRepo.Transfer(accounts[0].Account.AccountNumber, accounts[1].Account.AccountNumber, sum);
+            Assert.Equal(expectedBalanceFrom, accounts[0].Account.Balance);
+            Assert.Equal(expecedBalanceTo, accounts[1].Account.Balance);
+        }
+
+        [Fact]
+        public void TransferInsufficentAmount()
+        {
+            var bankRepo = BankRepository.Instance();
+
+            var accounts = bankRepo.GetAllCustomerAndAccounts();
+            int sum = accounts[0].Account.Balance + 10;
+            var expectedBalanceFrom = accounts[0].Account.Balance;
+            var expecedBalanceTo = accounts[1].Account.Balance;
+
+            bankRepo.Transfer(accounts[0].Account.AccountNumber, accounts[1].Account.AccountNumber, sum);
+            Assert.Equal(expectedBalanceFrom, accounts[0].Account.Balance);
+            Assert.Equal(expecedBalanceTo, accounts[1].Account.Balance);
+        }
     }
 }

@@ -72,5 +72,41 @@ namespace VictorBank.Models
             return $"Insättningen lyckades. Nytt saldo: {depositAccount.Balance}:-";
         }
 
+        public string Transfer(int fromAccountNumber, int toAccountNumber, int amount)
+        {
+            string message = "";
+
+            var fromAccount = GetAccount(fromAccountNumber);
+            var toAccount = GetAccount(toAccountNumber);
+            if (fromAccount == null)
+            {
+                message = $"Konto {fromAccountNumber} finns inte";
+            }
+            else if (toAccount == null)
+            {
+                message = $"Konto {toAccountNumber} finns inte";
+            }
+            else if (fromAccountNumber == toAccountNumber)
+            {
+                message = "Två olika konton måste anges";
+            }
+            else if (amount < 0)
+            {
+                message = "Belopp kan inte vara negativt";
+            }
+            else if (amount > fromAccount.Balance)
+            {
+                message = $"Inte tillräckligt med pengar på det överförande kontot";
+            }
+            else
+            {
+                fromAccount.Balance -= amount;
+                toAccount.Balance += amount;
+                message =$"Överföring lyckades. Saldo konto {fromAccountNumber}: {fromAccount.Balance}:-. Saldo konto {toAccountNumber}: {toAccount.Balance}:-.";
+            }
+
+            return message;
+        }
+
     }
 }
