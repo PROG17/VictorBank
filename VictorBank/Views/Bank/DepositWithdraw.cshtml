@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "DepositWithdraw";
+}
+
+<h2>Insättning och Uttag</h2>
+<h3 style="color: red">@ViewBag.message</h3>
+
+<form asp-controller="Bank">
+	<label>Kontonummer</label>
+	<input type="number" name="accountNumber"/>
+	<label>Summa (kronor)</label>
+	<input  step="0.01" name="sum"/>
+	<input type="submit" name="deposit" value="Insättning" formaction=@Url.Action("Deposit") formmethod="post" class="btn btn-primary" />
+	<input type="submit" name="withdraw" value="Uttag" formaction=@Url.Action("Withdraw") formmethod="post" class="btn btn-default" />
+</form>
+

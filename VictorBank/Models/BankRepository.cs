@@ -7,9 +7,24 @@ namespace VictorBank.Models
 {
     public class BankRepository
     {
+        public List<Customer> _customerWithAccounts;
+        private static BankRepository _instance;
+
         public List<Customer> GetAllCustomerAndAccounts()
         {
-            return CustomerAndAccount();
+            return _customerWithAccounts;
+        }
+
+        public static BankRepository Instance()
+        {
+            if (_instance == null)
+                _instance = new BankRepository();
+            return _instance;
+        }
+
+        private BankRepository()
+        {
+            _customerWithAccounts = CustomerAndAccount();
         }
 
         private List<Customer> CustomerAndAccount()
@@ -29,7 +44,33 @@ namespace VictorBank.Models
             return new List<Customer>(){customer1, customer2, customer3};
         }
 
+        private Account GetAccount(int accountNumber)
+        {
+            return _customerWithAccounts.Select(x => x.Account)
+                .SingleOrDefault(y => y.AccountNumber == accountNumber);
+        }
 
+        public string Withdraw(int withdrawAccountNumber, int amount)
+        {
+            var withdrawAccount = GetAccount(withdrawAccountNumber);
+            if (withdrawAccount == null)
+                return "Kontot finns inte.";
+            if (withdrawAccount.Balance < amount)
+                return "Uttaget är större än vad som finns på kontot.";
+            withdrawAccount.Balance -= amount;
+            return $"Lyckades ta ut {amount}:-. Nytt saldo: {withdrawAccount.Balance}:-";
+        }
+
+        public string Deposit(int depositAccountNumber, int amount)
+        {
+            var depositAccount = GetAccount(depositAccountNumber);
+            if (depositAccount == null)
+                return "Kontot finns inte";
+            if (amount < 0)
+                return "Kan ej sätta in en negativ summa";
+            depositAccount.Balance += amount;
+            return $"Insättningen lyckades. Nytt saldo: {depositAccount.Balance}:-";
+        }
 
     }
 }
