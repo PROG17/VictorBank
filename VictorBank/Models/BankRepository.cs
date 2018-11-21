@@ -12,7 +12,7 @@ namespace VictorBank.Models
 
         public List<Customer> GetAllCustomerAndAccounts()
         {
-            return CustomerAndAccount();
+            return _customerWithAccounts;
         }
 
         public static BankRepository Instance()
