@@ -47,5 +47,33 @@ namespace VictorBank.Controllers
             var result = _repository.Withdraw(accountNumber, sum);
             return RedirectToAction("DepositWithdraw", new { message = result });
         }
+
+        [HttpGet]
+        public IActionResult Transfer()
+        {
+            return View("AccountTransfer");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Transfer(int fromAccountNumber, int toAccountNumber, int sum)
+        {
+            string message = "";
+            if (sum == 0)
+            {
+                message = "Summa är noll eller i fel format";
+            }
+            else if(fromAccountNumber == 0 || toAccountNumber == 0)
+            {
+                message = "Minst ett av kontonummerna är i fel format";
+            }
+            else
+            {
+                message = _repository.Transfer(fromAccountNumber, toAccountNumber, sum);
+            }
+
+            ViewBag.message = message;
+            return View("AccountTransfer");
+        }
     }
 }
